@@ -5,15 +5,6 @@
 {% endblock %}
 {% block body %}
 <p>home</p>
-{% for dict_item in result %}
-    {% for key, value in dict_item.items%}
-        <h2>key is ={{ key }}</h2>
-        <h2>Value is ={{ value }}</h2>
-        {% if key == 'Image' %}
-            <img src="{{ value }}">
-        {% endif %}
-
-    {% endfor %}
-    {% endfor %}
+    <body></body>
 {% endblock %}
 </html>

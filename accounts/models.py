@@ -14,6 +14,6 @@ class ItemData(models.Model):
     ItemID = models.AutoField(primary_key=True)
     Description = models.CharField(default="",max_length=150)
     Location = models.CharField(default="",max_length=100)
-    Image = models.ImageField(blank=True)
+    Image = models.ImageField()
     Find_Date = models.DateTimeField(auto_now=True)
 
