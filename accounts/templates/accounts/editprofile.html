@@ -1,5 +1,31 @@
+<style>
+    button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #0b5de2;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+button:hover {background-color: #0b387f}
+
+button:active {
+  background-color: #0b387f;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+</style>
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <br>
+    <button type="submit">Update</button>
 </form>
