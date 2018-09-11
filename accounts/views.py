@@ -1,7 +1,8 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render,HttpResponse,redirect
-from accounts.forms import SignUpForm
+from accounts.forms import SignUpForm,EditProfileForm
 from accounts.models import UserProfile
+from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
@@ -38,3 +39,19 @@ def register(request):
 
     print('Hello')
     return render(request, 'accounts/signup.html', {'form': form})
+
+def profile(request):
+    obj = UserProfile.objects.get(user_id=request.user.id)
+    args = {'UID': obj.UID, 'contactno': obj.contactno, 'branch': obj.branch, 'year': obj.year}
+    return render(request, 'accounts/profile.html', args)
+
+def editprofile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('http://localhost:8000/accounts/profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+        args = {'form': form}
+        return render(request,'accounts/editprofile.html',args)
