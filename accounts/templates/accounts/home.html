@@ -107,4 +107,9 @@ function closeNav() {
   </div>
 </nav>
 
+<!-- upload images code  -->
+{%for i in data%}
+<img src="{{i.Image.url}}" alt="here">
+{{object.image.url}}
+{% endfor%}
 </body>

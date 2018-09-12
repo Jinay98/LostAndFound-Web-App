@@ -1,13 +1,14 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render,HttpResponse,redirect
 from accounts.forms import SignUpForm,EditProfileForm
-from accounts.models import UserProfile
+from accounts.models import UserProfile, ItemData
 from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
-    return render(request,'accounts/home.html')
+    data = ItemData.objects.all()
+    return render(request,'accounts/home.html', {'data' : data})
 
 def register(request):
     print('Hello')
