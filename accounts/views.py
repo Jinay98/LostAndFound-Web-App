@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render,HttpResponse,redirect
 from accounts.forms import SignUpForm,EditProfileForm
-from accounts.models import UserProfile, ItemData
+from accounts.models import UserProfile, ItemData,RequestData
 from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -71,3 +71,19 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
+
+def requestItem(request):
+    # args = {'UID': request.POST.get('UID')}
+    # print(request.POST.get('UID'))
+    # print(request.POST.get('desc'))
+    # print(request.POST.get('loc'))
+    # obj = RequestData(UID=request.POST.get('UID'),Description=request.POST.get('desc'),Location=request.POST.get('loc'))
+    # obj.save()
+    print(request.user.id)
+
+    submitButton = request.POST.get('Submit')
+    if submitButton=='Submit':
+        obj = RequestData(UID=request.POST.get('UID'),Description=request.POST.get('Description'),Location=request.POST.get('Location'))
+        obj.save()
+    return render(request, 'accounts/requestitem.html')
+

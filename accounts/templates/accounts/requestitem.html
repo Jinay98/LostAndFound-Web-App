@@ -1,4 +1,4 @@
-<title>Home Page</title>
+<title>Request Item</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -41,15 +41,37 @@
     margin-left: 50px;
 }
 #main {
-    transition: margin-left .5s;
-    padding: 16px;
+   transition: margin-left .5s;
+  padding: 16px;
 }
     @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+ .button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #0b5de2;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #0b387f}
+
+.button:active {
+  background-color: #0b387f;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 </style>
-            <script>
+<script>
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
@@ -62,7 +84,6 @@ function closeNav() {
     document.body.style.backgroundColor = "#84CEEB";
 }
 </script>
-<body >
 <div id="mySidenav" class="sidenav" style="z-index: 2">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
@@ -71,6 +92,7 @@ function closeNav() {
     <a href="http://localhost:8000/accounts/profile/edit">Edit Profile</a>
     <a href="http://localhost:8000/accounts/request">Request Item</a>
     <a href="/admin">Administrator</a>
+     <li><a href="http://localhost:8000/accounts/request" style="color: #f1f1f1">Request Item</a></li>
     <a href="http://www.spit.ac.in/about/">About us</a>
   <a href="/accounts/logout">Logout</a>
 </div>
@@ -85,11 +107,11 @@ function closeNav() {
 
     <ul class="nav navbar-nav">
              <li class="active"> <span style="font-size:25px;cursor:pointer;color: #f1f1f1;z-index: 0" onclick="openNav()">&#9776; Lost & Found</span></li>
-      <li ><a href="/accounts/" style="color: #f1f1f1">Home</a></li>
+      <li><a href="/accounts/" style="color: #f1f1f1">Home</a></li>
         <li><a href="accounts/login" style="color: #f1f1f1">Login</a></li>
-        <li class="active"><a href="http://localhost:8000/accounts/profile" style="background-color: #0b5de2">My Profile</a></li>
+        <li><a href="http://localhost:8000/accounts/profile" style="color: #f1f1f1">My Profile</a></li>
         <li><a href="http://localhost:8000/accounts/profile/edit" style="color: #f1f1f1">Edit Profile</a></li>
-        <li><a href="http://localhost:8000/accounts/request" style="color: #f1f1f1">Request Item</a></li>
+        <li class="active"><a href="http://localhost:8000/accounts/request" style="background-color: #0b5de2">Request Item</a></li>
         <li><a href="/admin" style="color: #f1f1f1">Administrator</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -98,72 +120,38 @@ function closeNav() {
     </ul>
   </div>
 </nav>
+
 <div id="main">
     <div class="container">
-                <div class="container" align="center">
-                    <h2>Welcome {{ user.get_full_name}} </h2>
-                    <p style="font-size: 35px"><b>Profile Details</b></p>
-                </div>
-        <br>
-        <div class="form-group">
+        <div class="container" align="center">  <b><p style="font-size: 35px">Request Item</p></b></div>
+        <form class="form-horizontal" method="post">
+            {% csrf_token %}
+           <div class="form-group">
         <br><br><br><br>
-     <b><label class="control-label col-sm-2" for="UID" style="font-size:25px">UID:</label></b>
+      <label class="control-label col-sm-2" for="UID" style="font-size:20px">UID:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="UID" placeholder="UID of Student"name="UID" style="font-size: 18px"  />
+          <br><br>
+      </div>
 
+      <label class="control-label col-sm-2" for="Description" style="font-size:20px">Description:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="email" placeholder="UID of Student"name="UID" value="{{ UID }}" style="font-size: 18px" >
+        <input type="text" class="form-control" id="Description" placeholder="Description Of The Item"name="Description" style="font-size: 18px"  />
           <br><br>
       </div>
-    </div>
-        <div class="form-group">
-      <b><label class="control-label col-sm-2" for="stuusername" style="font-size:25px">Username:</label></b>
-        <br><br>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="stuusername" placeholder="Username of Student" name="stuusername" value='{{ user.username}}' style="font-size: 18px" >
-          <br><br>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <b><label class="control-label col-sm-2" for="stuname" style="font-size:25px">Name:</label></b>
-        <br><br>
+      <label class="control-label col-sm-2" for="Location" style="font-size:20px">Location:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="stuname" placeholder="Name of Student" name="stuname" value='{{ user.get_full_name}}' style="font-size: 18px" >
+        <input type="text" class="form-control" id="Location" placeholder="Location Where You Left It"name="Location" style="font-size: 18px"  />
           <br><br>
       </div>
-    </div>
-        <div class="form-group">
-      <b><label class="control-label col-sm-2" for="stuemail" style="font-size:25px">EmailId:</label></b>
-        <br><br>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="stuemail" placeholder="Email ID of Student" name="stuemail" value='{{ user.email}}' style="font-size: 18px" >
-          <br><br>
-      </div>
-    </div>
-        <div class="form-group">
-      <b><label class="control-label col-sm-2" for="branch" style="font-size:25px">Branch:</label></b>
-            <br><br>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="branch" placeholder="Branch of Student" name="branch" value="{{ branch }}" style="font-size: 18px">
-          <br><br>
-      </div>
-    </div>
-        <div class="form-group">
-      <b><label class="control-label col-sm-2" for="year" style="font-size:25px">Year:</label></b>
-            <br><br>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="year" placeholder="Year of Student" name="year" value="{{ year }}" style="font-size: 18px" >
-          <br><br>
-      </div>
-    </div>
-        <div class="form-group">
-      <b><label class="control-label col-sm-2" for="contactno" style="font-size:25px">Contact No:</label></b>
-            <br><br>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="contactno" placeholder="Contact No." name="contactno" value="{{ contactno }}" style="font-size: 18px">
-          <br><br>
-      </div>
+
+ 	<div class="container" align="center">
+        <input type="Submit" id="Submit" name="Submit" value="Submit" class="button"/><br><br>
     </div>
 
     </div>
+
+   </form>
 </div>
-</body>
+</div>
