@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^request/$',views.requestItem,name='requestItem'),
     url(r'^profile/edit$', views.editprofile, name='editprofile'),
     url(r'^password/$', views.change_password, name='change_password'),
+    url(r'^claim/(?P<id>\d+)/$', views.claim, name='claim'),
 ]

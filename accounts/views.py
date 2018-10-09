@@ -5,7 +5,12 @@ from accounts.models import UserProfile, ItemData,RequestData
 from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 # Create your views here.
+def claim(request, id):
+    item = get_object_or_404(ItemData, pk=id)
+    return render(request, 'accounts/claim.html', {'item' : item})
+
 def home(request):
     data = ItemData.objects.all()
     return render(request,'accounts/home.html', {'data' : data})

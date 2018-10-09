@@ -1,4 +1,3 @@
-
 <title>Home Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -100,38 +99,4 @@ function closeNav() {
   </div>
 </nav>
 
-<!-- upload images code  -->
-<div class="container-fluid">
-    {%  for i in data  %}
-        {% if forloop.counter0|divisibleby:3 %} <div class="row text-center"> {%  endif %}
-          <div class="col-md-4" style="cursor: pointer">
-              <div class="card">
-                    <img class="img-card-top mx-auto" src="{{i.Image.url}}" 
-                    alt="{{i.ItemID}}" width="300px" height="200px">
-                  <div class="card-content">              
-                        <p class="card-text">{{ i.Description }} </p> 
-                        <a href="{% url 'claim' id=i.ItemID %}"><button> Click here to claim </button></a>
-                  </div><!-- card content -->
-              </div><!-- card -->
-          </div><!-- col-md-4 -->
-    {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><!-- row closing --><hr>{%  endif %}
-    {%  endfor %}
-</div>
-</body>
-<style>
-    .card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-/* Add some padding inside the card container */
-.container {
-    padding: 2px 16px;
-}
-</style>
+{{item.ItemID}}
