@@ -40,10 +40,10 @@
     font-size: 36px;
     margin-left: 50px;
 }
-{##main {#}
-{#    transition: margin-left .5s;#}
-{#    padding: 16px;#}
-{#}#}
+#main {
+   transition: margin-left .5s;
+  padding: 16px;
+}
     @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
@@ -98,5 +98,47 @@ function closeNav() {
     </ul>
   </div>
 </nav>
+<div id="main">
+        <div class="container">
+<form class="form-horizontal" method="post">
+        {% csrf_token %}
+       <div class="form-group">
+    <br><br><br><br>
+  <!-- <label class="control-label col-sm-2" for="UID" style="font-size:20px">UID:</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="UID" placeholder="UID of Student"name="UID" style="font-size: 18px"  />
+      <br><br>
+  </div> -->
 
-{{item.ItemID}}
+  <!-- <label class="control-label col-sm-2" for="Description" style="font-size:20px">Description:</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="Description" placeholder="Description Of The Item"name="Description" style="font-size: 18px"  />
+      <br><br>
+  </div> -->
+
+  <label class="control-label col-sm-2" for="Location" style="font-size:20px">Location:</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="Location" placeholder="Location Where You Left It"name="Location" style="font-size: 18px"  />
+      <br><br>
+  </div>
+
+  <input type="text" class="form-control" id="ItemID" name="ItemID"value="{{item.ItemID}}" style="visibility:hidden">
+
+ <div class="container" align="center">
+    <input type="Submit" id="Submit" name="Submit" value="Submit" class="button"/><br><br>
+</div>
+
+</div>
+
+</form>
+{%if post%}
+    {% if status%}
+    <script>
+        alert('Claim Accepted')
+    </script>
+    {%else%}
+    <script>
+        alert('Claim Rejected, Please Try later')
+    </script>
+    {%endif%}
+{%endif%}

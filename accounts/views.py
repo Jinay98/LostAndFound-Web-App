@@ -1,15 +1,33 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render,HttpResponse,redirect
 from accounts.forms import SignUpForm,EditProfileForm
-from accounts.models import UserProfile, ItemData,RequestData
+from accounts.models import UserProfile, ItemData, RequestData, ClaimData
 from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+
 # Create your views here.
 def claim(request, id):
     item = get_object_or_404(ItemData, pk=id)
-    return render(request, 'accounts/claim.html', {'item' : item})
+    status = False
+    post1 = False
+    if request.method == 'POST':
+        location_claim = request.POST.get('Location').lower()
+        itemid = ItemData.objects.get(pk = request.POST.get('ItemID'))
+        location_act = itemid.Location.lower()
+        post1 = True
+        if location_act in location_claim or location_claim in location_act:
+            status = True
+            obj = ClaimData(
+                UserID = request.user,
+                Location = location_claim,
+                ItemID = ItemData.objects.get(pk = request.POST.get('ItemID')),
+            )
+            obj.save()
+    return render(request, 'accounts/claim.html', {'item' : item, 'status':status, 'post' : post1})
+
+
 
 def home(request):
     data = ItemData.objects.all()
@@ -91,4 +109,5 @@ def requestItem(request):
         obj = RequestData(UID=request.POST.get('UID'),Description=request.POST.get('Description'),Location=request.POST.get('Location'))
         obj.save()
     return render(request, 'accounts/requestitem.html')
+
 

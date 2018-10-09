@@ -21,6 +21,11 @@ class ItemData(models.Model):
     Image = models.ImageField(upload_to='images', blank=True)
     Find_Date = models.DateTimeField(auto_now=True)
 
+class ClaimData(models.Model):
+    ClaimID = models.AutoField(primary_key=True)
+    UserID = models.ForeignKey(User, on_delete=models.CASCADE)
+    ItemID = models.ForeignKey(ItemData, on_delete=models.CASCADE)
+    Location = models.CharField(default="", max_length=100)
 
 class RequestData(models.Model):
     UID = models.IntegerField(default=0)
