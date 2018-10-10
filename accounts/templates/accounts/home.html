@@ -41,6 +41,29 @@
     font-size: 36px;
     margin-left: 50px;
 }
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #0b5de2;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+button:hover {background-color: #0b387f}
+
+button:active {
+  background-color: #0b387f;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 {##main {#}
 {#    transition: margin-left .5s;#}
 {#    padding: 16px;#}
@@ -110,7 +133,7 @@ function closeNav() {
                     alt="{{i.ItemID}}" width="300px" height="200px">
                   <div class="card-content">              
                         <p class="card-text">{{ i.Description }} </p> 
-                        <a href="{% url 'claim' id=i.ItemID %}"><button> Click here to claim </button></a>
+                        <a href="{% url 'claim' id=i.ItemID %}"><button > Click here to claim </button></a><br><br>
                   </div><!-- card content -->
               </div><!-- card -->
           </div><!-- col-md-4 -->
