@@ -1,25 +1,25 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
 {% block head %}
-    <title>SIGN IN</title>
-{%  endblock %}
-{%  block body %}
+<title>SIGN IN</title>
+{% endblock %}
+{% block body %}
 
-    <div class="container">
-    <div class="container" align="center">
+<div class="container">
+  <div class="container" align="center">
     <br><br>
     <p style="font-size: 50px">Lost And Found</p>
     <br>
     <p style="font-size: 40px">Login</p>
     <br><br><br>
-    </div>
+  </div>
 
-    <div class="container" align="center">
+  <div class="container" align="center">
     <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-        <br><br><br>
-    <button type=submit" name="submit" class="button" >Login</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <br><br><br>
+      <button type=submit" name="submit" class="button">Login</button>
     </form>
-    </div>
-{% endblock %}
-    </div>
+  </div>
+  {% endblock %}
+</div>

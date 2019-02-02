@@ -1,76 +1,105 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
+
+<head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-                .navbar{
-                    z-index: 1;
-                }
-        body {
-        background-color: #84CEEB;
-}
-                .button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 20px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: #0b5de2;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
-}
+  <style>
+    .navbar {
+      z-index: 1;
+    }
 
-.button:hover {background-color: #0b387f}
+    body {
+      background-color: #84CEEB;
+    }
 
-.button:active {
-  background-color: #0b387f;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 20px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      outline: none;
+      color: #fff;
+      background-color: #0b5de2;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 9px #999;
+    }
 
-            </style>
+    .button:hover {
+      background-color: #0b387f
+    }
 
-        {%  block head %}
-            <title>Base</title>
+    .button:active {
+      background-color: #0b387f;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
 
-        {% endblock %}
-    </head>
-    <body >
+    .card {
+      /* Add shadows to create the "card" effect */
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+    }
 
+    /* On mouse-over, add a deeper shadow */
+    .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
 
-<nav class="navbar navbar-inverse" style="z-index: 0;background-color: #374785;background: #374785;border-color:#374785 ">
-  <div class="container-fluid">
-    <div class="navbar-header">
+    /* Add some padding inside the card container */
+    .container {
+      padding: 2px 16px;
+    }
+  </style>
 
-{#        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Splacer</span>#}
-</div>
+  {% block head %}
+  <title>Base</title>
+  {% endblock %}
+</head>
+<script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    document.body.style.backgroundColor = "#84CEEB";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+    document.body.style.backgroundColor = "#84CEEB";
+  }
+</script>
+
+<body>
+  <nav class="navbar navbar-inverse" style="z-index: 0;background-color: #374785;background: #374785;border-color:#374785 ">
+    <div class="container-fluid">
+      <div class="navbar-header">
+      </div>
     </div>
     <ul class="nav navbar-nav">
-             <li  style="color: #374785"> <a class="navbar-brand" href="#" style="color: #f1f1f1">Lost And Found</a></li>
-      <li><a href="http://localhost:8000/accounts/" style="color: #f1f1f1">Home</a></li>
-        <li><a href="accounts/login" style="color: #f1f1f1">Login</a></li>
-        <li><a href="http://localhost:8000/accounts/profile" style="color: #f1f1f1">My Profile</a></li>
-
-
+      <li><a href="{%url 'home'%}" style="color: #f1f1f1">Lost & Found</a></li>
+      <li><a href="{%url 'login'%}" style="color: #f1f1f1">Login</a></li>
+      <li><a href="{%url 'profile'%}" style="color: #f1f1f1">My Profile</a></li>
+      <li><a href="{%url 'edit_profile'%}" style="color: #f1f1f1">Edit Profile</a></li>
+      <li><a href="{%url 'request_item'%}" style="color: #f1f1f1">Request Item</a></li>
+      <li><a href="/admin" style="color: #f1f1f1">Administrator</a></li>
+      <li><a href="http://www.spit.ac.in/about/" style="color: #f1f1f1"> About us</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="/accounts/register" style="color: #f1f1f1"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="accounts/logout" style="color: #f1f1f1"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a href="{%url 'register'%}" style="color: #f1f1f1"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="{%url 'logout'%}" style="color: #f1f1f1"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
-  </div>
-</nav>
+    </div>
+  </nav>
+  {% block body %}
+  <h1>Base</h1>
+  {% endblock %}
+</body>
 
-
-    {% block body %}
-        <h1>Base</h1>
-    {% endblock %}
-    </body>
 </html>
