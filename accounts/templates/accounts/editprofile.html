@@ -1,12 +1,27 @@
 {%extends 'base.html'%}
 {%block head%}<title>Edit Profile Page</title>{%endblock%}
 {%block body%}
-<div align="center">
-    <form method="post">
+<div class="container text-center">
+  <h2>Sign up</h2>
+  <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <br>
-    <button type="submit">Update</button>
-</form>
+    <table align='center'>
+    {% for field in form %}
+    <tr>
+        {% if field.name != 'password'%}
+        <td>{{ field.label_tag }}</td><td>{{ field }}</td>
+        
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+        {% else %}
+        <td>Password:</td> <td><a href="{%url 'change_password'%}">Click here </a> to change password</td>
+        {%endif%}
+    </tr>
+    <tr><td>&nbsp;</td></tr>
+    {% endfor %}
+    </table>
+    <button type="submit">Submit</button>
+  </form>
 </div>
 {%endblock%}

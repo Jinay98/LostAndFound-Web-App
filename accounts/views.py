@@ -75,11 +75,11 @@ def editprofile(request):
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('http://localhost:8000/accounts/profile')
+            return redirect('accounts/profile')
     else:
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
-        return render(request,'accounts/editprofile.html',args)
+        return render(request,'accounts/editprofile.html', args)
 
 def change_password(request):
     if request.method == 'POST':
@@ -87,9 +87,9 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request,form.user)
-            return redirect('http://localhost:8000/accounts/profile')
+            return redirect('accounts/profile')
         else:
-            return redirect('http://localhost:8000/accounts/change-password/')
+            return redirect('accounts/change-password')
     else:
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
